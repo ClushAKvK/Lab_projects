@@ -3,8 +3,8 @@ package com.company.objects;
 import java.util.Random;
 
 public class Matrix {
-    public static final int minValue = 0;
-    public static final int maxValue = 10;
+    public static final int minValue = -100;
+    public static final int maxValue = 100;
 
     private int rank;
 
@@ -15,6 +15,7 @@ public class Matrix {
         this.matrix = new double[rank][rank + 1];
         joinVector(A, b);
     }
+
 
     public static double[][] generationMatrix(int rank) {
         double [][] matrix = new double[rank][rank];
@@ -27,6 +28,7 @@ public class Matrix {
         return matrix;
     }
 
+
     private void joinVector(double [][] A, double [] b) {
         for (int i = 0; i < rank; i++) {
             for (int j = 0; j < rank; j++) {
@@ -36,19 +38,15 @@ public class Matrix {
         }
     }
 
-    public double get(int i, int j) {
-        return matrix[i][j];
-    }
 
-    public void set(int i, int j, double value) {
-        matrix[i][j] = value;
-    }
+    public double get(int i, int j) { return matrix[i][j]; }
 
-    public int getRank() {
-        return rank;
-    }
+    public void set(int i, int j, double value) { matrix[i][j] = value; }
+
+    public int getRank() { return rank; }
 
     public double[][] getMatrix() { return matrix; }
+
 
     public void print() {
         for (int i = 0; i < rank; i++) {
@@ -60,6 +58,7 @@ public class Matrix {
         System.out.println();
     }
 
+
     public void swapLine(int line, int sLine) {
         for (int i = 0; i < rank + 1; i++) {
             double temp = matrix[line][i];
@@ -68,12 +67,14 @@ public class Matrix {
         }
     }
 
-    public void toNormalView(int line) {
+
+    public void toNormalView(int line) throws ArrayIndexOutOfBoundsException {
         for (int i = line + 1; matrix[line][line] == 0; i++) {
             if (matrix[i][line] != 0)
                 swapLine(line, i);
         }
     }
+
 
     public void multipleLineBy(int line, double value) {
         for (int j = 0; j < rank + 1; j++) {
@@ -81,11 +82,13 @@ public class Matrix {
         }
     }
 
+
     public void divideLineBy(int line, double value) {
         for (int j = 0; j < rank + 1; j++) {
             matrix[line][j] /= value;
         }
     }
+
 
     public void subtractLine(int line, int subLine) {
         for (int j = 0; j < rank + 1; j++) {

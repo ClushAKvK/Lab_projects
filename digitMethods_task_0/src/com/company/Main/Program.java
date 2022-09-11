@@ -45,7 +45,12 @@ public class Program {
             b[i] = sc.nextDouble();
     }
 
+
     private void input(boolean autoGen) throws FileNotFoundException {
+        if (autoGen == false) {
+            input();
+            return;
+        }
         rank = 5;
         A = Matrix.generationMatrix(rank);
 
@@ -57,17 +62,62 @@ public class Program {
 
     }
 
+
+    public static void print(double [][] a) {
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a.length; j++) {
+                System.out.print(a[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+
+    public static void print(double [] a) {
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i] + " ");
+        }
+        System.out.println();
+    }
+
+
+    public static void printWithRound(double [][] a) {
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a.length; j++) {
+                System.out.print(Math.round(a[i][j] * roundValue) / roundValue + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+
+    public static void printWithRound(double [] a) {
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(Math.round(a[i] * roundValue) / roundValue + " ");
+        }
+        System.out.println();
+    }
+
+
     public void start() {
         try {
-            input(true);
+            input();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-
         Matrix matrix = new Matrix(rank, A, b);
 
-        Gauss.straightRunning(matrix);
+        try {
+            Gauss.straightRunning(matrix);
+        }
+        catch (Exception e) {
+            System.out.println("This system is unrealisable");
+            System.exit(0);
+        }
+
         Gauss.reverseRunning(matrix);
 
         double [] x = Gauss.resultRunning(matrix);
@@ -85,39 +135,5 @@ public class Program {
         System.out.println("Discrepancy:");
         printWithRound(discrepancy);
 
-    }
-
-    public static void print(double [][] a) {
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < a.length; j++) {
-                System.out.print(a[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
-    public static void print(double [] a) {
-        for (int i = 0; i < a.length; i++) {
-            System.out.print(a[i] + " ");
-        }
-        System.out.println();
-    }
-
-    public static void printWithRound(double [][] a) {
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < a.length; j++) {
-                System.out.print(Math.round(a[i][j] * roundValue) / roundValue + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
-    public static void printWithRound(double [] a) {
-        for (int i = 0; i < a.length; i++) {
-            System.out.print(Math.round(a[i] * roundValue) / roundValue + " ");
-        }
-        System.out.println();
     }
 }

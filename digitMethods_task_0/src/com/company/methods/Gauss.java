@@ -5,7 +5,7 @@ import com.company.objects.Matrix;
 
 public class Gauss {
 
-    public static void straightRunning(Matrix a) {
+    public static void straightRunning(Matrix a) throws Exception{
         for (int i = 0; i < a.getRank() - 1; i++) {
             a.toNormalView(i);
             for (int j = i + 1; j < a.getRank(); j++) {
@@ -15,7 +15,11 @@ public class Gauss {
                 a.subtractLine(j, i);
             }
         }
+
+        if (a.get(a.getRank() - 1, a.getRank() - 1) == 0)
+            throw new IllegalArgumentException();
     }
+
 
     public static void reverseRunning(Matrix a) {
         for (int i = a.getRank() - 1; i > 0; i--) {
@@ -29,6 +33,7 @@ public class Gauss {
         }
     }
 
+
     public static double[] resultRunning(Matrix a) {
         for (int i = 0; i < a.getRank(); i++) {
             a.divideLineBy(i, a.get(i, i));
@@ -40,6 +45,7 @@ public class Gauss {
         }
         return x;
     }
+
 
     public static double[] calcDiscrepancy(double [][] A, double [] x, double [] b) {
         double [] discrepancy = new double[x.length];
