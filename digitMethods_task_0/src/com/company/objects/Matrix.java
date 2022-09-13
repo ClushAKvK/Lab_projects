@@ -3,8 +3,8 @@ package com.company.objects;
 import java.util.Random;
 
 public class Matrix {
-    public static final int minValue = -100;
-    public static final int maxValue = 100;
+    public static final int minValue = -10;
+    public static final int maxValue = 10;
 
     private int rank;
 

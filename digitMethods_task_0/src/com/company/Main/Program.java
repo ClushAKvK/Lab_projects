@@ -26,7 +26,7 @@ public class Program {
     public Program() {}
 
     private void input() throws FileNotFoundException {
-        String path = Path.of("").toAbsolutePath() + "\\input.txt";
+        String path = Path.of("").toAbsolutePath() + "\\input4.txt";
         File file = new File(path);
         Scanner sc = new Scanner(file);
         sc.useLocale(Locale.UK);
@@ -51,7 +51,9 @@ public class Program {
             input();
             return;
         }
+
         rank = 5;
+
         A = Matrix.generationMatrix(rank);
 
         b = new double[rank];
@@ -75,10 +77,13 @@ public class Program {
 
 
     public static void print(double [] a) {
+        System.out.print("(");
         for (int i = 0; i < a.length; i++) {
-            System.out.print(a[i] + " ");
+            if (i == a.length - 1) System.out.print(a[i]);
+            else System.out.print(a[i] + ", ");
         }
-        System.out.println();
+        System.out.print(")");
+        System.out.println("\n");
     }
 
 
@@ -94,14 +99,18 @@ public class Program {
 
 
     public static void printWithRound(double [] a) {
+        System.out.print("(");
         for (int i = 0; i < a.length; i++) {
-            System.out.print(Math.round(a[i] * roundValue) / roundValue + " ");
+            if (i == a.length - 1) System.out.print(Math.round(a[i] * roundValue) / roundValue);
+            else System.out.print(Math.round(a[i] * roundValue) / roundValue + ", ");
         }
-        System.out.println();
+        System.out.print(")");
+        System.out.println("\n");
     }
 
 
     public void start() {
+
         try {
             input();
         } catch (FileNotFoundException e) {
@@ -114,7 +123,7 @@ public class Program {
             Gauss.straightRunning(matrix);
         }
         catch (Exception e) {
-            System.out.println("This system is unrealisable");
+            System.out.println(e.getMessage());
             System.exit(0);
         }
 

@@ -5,7 +5,7 @@ import com.company.objects.Matrix;
 
 public class Gauss {
 
-    public static void straightRunning(Matrix a) throws Exception{
+    public static void straightRunning(Matrix a) throws Exception {
         for (int i = 0; i < a.getRank() - 1; i++) {
             a.toNormalView(i);
             for (int j = i + 1; j < a.getRank(); j++) {
@@ -16,8 +16,11 @@ public class Gauss {
             }
         }
 
-        if (a.get(a.getRank() - 1, a.getRank() - 1) == 0)
-            throw new IllegalArgumentException();
+        if (a.get(a.getRank() - 1, a.getRank() - 1) == 0) {
+            if (a.get(a.getRank() - 1, a.getRank()) == 0)
+                throw new IllegalArgumentException("This system have many solutions");
+            throw new IllegalArgumentException("This system is unsolvable");
+        }
     }
 
 
