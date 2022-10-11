@@ -119,6 +119,11 @@ public class Program {
             e.printStackTrace();
         }
 
+
+        double [][] A1 = new double[rank][rank];
+        for (int i = 0; i < rank; i++)
+            A1[i] = A[i].clone();
+
         Matrix matrix = new Matrix(
                 rank,
                 Matrix.multiplyMatrices(Matrix.transposition(A), A),
@@ -130,6 +135,9 @@ public class Program {
 
 
         double[] x = Zeidel.run(matrix, eps);
+
+        double[] dis = Zeidel.calcDiscrepancy(A1, x, b);
+        print(dis);
 
         System.out.println("Matrix A:");
         print(A);

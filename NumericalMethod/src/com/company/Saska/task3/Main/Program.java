@@ -20,7 +20,7 @@ public class Program {
 
     private void input() throws FileNotFoundException {
         //System.out.println("Промежуток апроксимации функции");
-        String path = Path.of("").toAbsolutePath() + "\\resources\\task3\\input.txt";
+        String path = Path.of("").toAbsolutePath() + "\\resources\\task3\\input1.txt";
         File file = new File(path);
         Scanner sc = new Scanner(file);
         sc.useLocale(Locale.UK);

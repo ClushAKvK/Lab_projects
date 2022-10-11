@@ -36,4 +36,21 @@ public class Zeidel {
 
         return x;
     }
+
+    public static double[] calcDiscrepancy(double [][] A, double [] x, double [] b) {
+        double [] discrepancy = new double[x.length];
+        for (int i = 0; i < discrepancy.length; i++) {
+            for (int j = 0; j < discrepancy.length; j++) {
+                discrepancy[i] += A[i][j] * x[j];
+            }
+        }
+
+        //Program.printWithRound(discrepancy);
+
+        for (int i = 0; i < discrepancy.length; i++) {
+            discrepancy[i] = b[i] - discrepancy[i];
+        }
+
+        return discrepancy;
+    }
 }
