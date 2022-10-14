@@ -10,6 +10,12 @@ public class Matrix {
 
     private double [][] matrix;
 
+
+    public Matrix(int rank, double[][] matrix) {
+        this.rank = rank;
+        this.matrix = matrix;
+    }
+
     public Matrix(int rank, double [][] A, double [] b) {
         this.rank = rank;
         this.matrix = new double[rank][rank + 1];
@@ -29,12 +35,69 @@ public class Matrix {
     }
 
 
+    public static double[][] transposition(double[][] matrix) {
+        double[][] result = new double[matrix.length][];
+        for (int i = 0; i < matrix.length; i++)
+            result[i] = matrix[i].clone();
+
+        for (int i = 0; i < result.length; i++) {
+            for (int j = i+1; j < result.length; j++) {
+                double temp = result[i][j];
+                result[i][j] = result[j][i];
+                result[j][i] = temp;
+            }
+        }
+        return result;
+    }
+
+
+    public static double multiplyMatricesCell(double[][] firstMatrix, double[][] secondMatrix, int row, int col) {
+        double cell = 0;
+        for (int i = 0; i < secondMatrix.length; i++) {
+            cell += firstMatrix[row][i] * secondMatrix[i][col];
+        }
+        return cell;
+    }
+
+
+    public static double[][] multiplyMatrices(double[][] firstMatrix, double[][] secondMatrix) {
+        double[][] result = new double[firstMatrix.length][secondMatrix[0].length];
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[i].length; j++) {
+                result[i][j] = multiplyMatricesCell(firstMatrix, secondMatrix, i, j);
+            }
+        }
+        return result;
+    }
+
+    public static double[] multiplyMatrices(double[][] matrix, double[] vector) {
+        double[] result = new double[matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < result.length; j++) {
+                result[i] += matrix[i][j] * vector[j];
+            }
+        }
+        return result;
+    }
+
+
     private void joinVector(double [][] A, double [] b) {
         for (int i = 0; i < rank; i++) {
             for (int j = 0; j < rank; j++) {
                 matrix[i][j] = A[i][j];
             }
             matrix[i][rank] = b[i];
+        }
+    }
+
+
+    public void toNormalView() {
+        for(int i = 0; i < rank; i++) {
+            for (int j = 0; j < rank; j++) {
+                if (i == j) continue;
+                matrix[i][j] /= matrix[i][i] * (-1);
+            }
+            matrix[i][rank] /= matrix[i][i];
         }
     }
 
@@ -56,23 +119,6 @@ public class Matrix {
             System.out.println();
         }
         System.out.println();
-    }
-
-
-    public void swapLine(int line, int sLine) {
-        for (int i = 0; i < rank + 1; i++) {
-            double temp = matrix[line][i];
-            matrix[line][i] = matrix[sLine][i];
-            matrix[sLine][i] = temp;
-        }
-    }
-
-
-    public void toNormalView(int line) throws ArrayIndexOutOfBoundsException {
-        for (int i = line + 1; matrix[line][line] == 0; i++) {
-            if (matrix[i][line] != 0)
-                swapLine(line, i);
-        }
     }
 
 

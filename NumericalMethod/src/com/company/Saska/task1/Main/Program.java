@@ -1,6 +1,6 @@
 package com.company.Saska.task1.Main;
 
-import com.company.Saska.task1.methods.Gauss;
+import com.company.Saska.task1.methods.Zeidel;
 import com.company.Saska.task1.objects.Matrix;
 
 import java.io.File;
@@ -15,7 +15,7 @@ import static com.company.Saska.task1.objects.Matrix.minValue;
 
 public class Program {
 
-    private static final double roundValue = 100.0;
+    private static final double roundValue = 10000.0;
 
     public int rank;
 
@@ -23,10 +23,12 @@ public class Program {
 
     public double [] b;
 
+    public double eps = 0.0001;
+
     public Program() {}
 
     private void input() throws FileNotFoundException {
-        String path = Path.of("").toAbsolutePath() + "\\input4.txt";
+        String path = Path.of("").toAbsolutePath() + "\\resources\\task2\\input5.txt";
         File file = new File(path);
         Scanner sc = new Scanner(file);
         sc.useLocale(Locale.UK);
@@ -117,20 +119,25 @@ public class Program {
             e.printStackTrace();
         }
 
-        Matrix matrix = new Matrix(rank, A, b);
 
-        try {
-            Gauss.straightRunning(matrix);
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.exit(0);
-        }
+        double [][] A1 = new double[rank][rank];
+        for (int i = 0; i < rank; i++)
+            A1[i] = A[i].clone();
 
-        Gauss.reverseRunning(matrix);
+        Matrix matrix = new Matrix(
+                rank,
+                Matrix.multiplyMatrices(Matrix.transposition(A), A),
+                Matrix.multiplyMatrices(Matrix.transposition(A), b)
+        );
 
-        double [] x = Gauss.resultRunning(matrix);
-        double [] discrepancy = Gauss.calcDiscrepancy(A, x, b);
+//        matrix.print();
+
+
+
+        double[] x = Zeidel.run(matrix, eps);
+
+        double[] dis = Zeidel.calcDiscrepancy(A1, x, b);
+        print(dis);
 
         System.out.println("Matrix A:");
         print(A);
@@ -141,8 +148,6 @@ public class Program {
         System.out.println("Result vector x:");
         printWithRound(x);
 
-        System.out.println("Discrepancy:");
-        printWithRound(discrepancy);
 
     }
 }
