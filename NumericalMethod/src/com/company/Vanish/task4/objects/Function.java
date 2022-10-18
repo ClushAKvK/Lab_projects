@@ -1,4 +1,4 @@
-package com.company.Saska.task3.objects;
+package com.company.Vanish.task4.objects;
 
 import javacalculus.core.CALC;
 import javacalculus.core.CalcParser;
@@ -13,9 +13,9 @@ public class Function {
 
     private String variable = "x";
 
-    public Function(String expression) {
-
+    public Function(String expression, String express) {
         this.expression = expression;
+        //expressT(express);
     }
 
     public String getExpression() {
@@ -27,24 +27,19 @@ public class Function {
     }
 
 
-    public double getValueIn(double valueX) {
+    public double getValueIn(double valueX, double valueY) {
         CalcObject result = parseFunction(expression);
 
         result = subst(result, "x", valueX);
+        result = subst(result, "y", valueY);
         result = CALC.SYM_EVAL(result);
 
         return Double.parseDouble(String.valueOf(result));
     }
 
 
-    public double getSecondDifferentiateIn(double valueX) {
-        String command = "DIFF(DIFF(" + expression + ", " + variable + "), " + variable + " )";
-        CalcObject result = parseFunction(command);
-
-        result = subst(result, "x", valueX);
-        result = CALC.SYM_EVAL(result);
-
-        return Double.parseDouble(String.valueOf(result));
+    private void expressT(String T) {
+        expression = expression + " + " + T;
     }
 
 

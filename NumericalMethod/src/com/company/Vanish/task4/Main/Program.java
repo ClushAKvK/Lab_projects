@@ -1,12 +1,15 @@
-package com.company.Saska.task3.Main;
+package com.company.Vanish.task4.Main;
 
-import com.company.Saska.task3.methods.Hord;
-import com.company.Saska.task3.objects.Function;
+import com.company.Vanish.task4.methods.Zeidel;
+import com.company.Vanish.task4.objects.Function;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Scanner;
+import java.util.Set;
 
 public class Program {
 
@@ -14,37 +17,37 @@ public class Program {
 
     public static final int n = 20;
 
-    public static double A;
+    public static String expression1;
+    public static String expression1X;
 
-    public static double B;
+    public static String expression2;
+    public static String expression2Y;
 
-    public static String expression;
-
-    public static Function function;
+    public static Function function1;
+    public static Function function2;
 
     public static final double eps = 0.0001;
 
     private static void input() throws FileNotFoundException {
-        //System.out.println("Промежуток апроксимации функции");
-        String path = Path.of("").toAbsolutePath() + "\\resources\\task3\\input4.txt";
+        String path = Path.of("").toAbsolutePath() + "\\resources\\task4\\input1.txt";
         File file = new File(path);
         Scanner sc = new Scanner(file);
         sc.useLocale(Locale.UK);
 
-        A = sc.nextDouble();
-        B = sc.nextDouble();
+        expression1 = sc.nextLine();
+        expression1X = sc.nextLine();
+        expression2 = sc.nextLine();
+        expression2Y = sc.nextLine();
 
-        sc.nextLine();
-        expression = sc.nextLine();
-
-        function = new Function(expression);
-//        System.out.println(function.getSecondDifferentiateIn(5));
+        function1 = new Function(expression1X, "x");
+        function2 = new Function(expression2Y, "y");
     }
 
 
     private static void output(Set<Double> x, Set<Double> discrepancy) {
-        System.out.println("Interval: (" + A + ", " + B + ")");
-        System.out.println("Function: " + expression);
+        //System.out.println("Interval: (" + A + ", " + B + ")");
+        System.out.println("Function 1: " + expression1);
+        System.out.println("Function 2: " + expression2);
         System.out.print("Result x: "); print(x);
         System.out.print("Discrepancy x: "); print(discrepancy);
     }
@@ -80,11 +83,17 @@ public class Program {
             e.printStackTrace();
         }
 
-        Set<Double> x = Hord.run(A, B, function);
 
-        Set<Double> discrepancy = Hord.calcDiscrepancy(x, function);
+        Set<Double> result = Zeidel.run(function1, function2, eps);
 
-        output(x, discrepancy);
+        function1 = new Function(expression1, "x");
+        function2 = new Function(expression2, "y");
+        Set<Double> discrepancy = Zeidel.calcDiscrepancy(result, function1, function2);
+
+        output(result, discrepancy);
+
+
+        //output(x, discrepancy);
     }
 
 
