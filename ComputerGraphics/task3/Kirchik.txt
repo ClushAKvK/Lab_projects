@@ -1,0 +1,297 @@
+#include <windows.h> 
+#include "glut.h" 
+
+char title[] = "3D Shapes with animation";
+GLfloat angle = 0.0f;
+//GLfloat angleCube = 0.0f;   
+int refreshMills = 15;
+
+void initGL() {
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearDepth(1.0f);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
+    glShadeModel(GL_SMOOTH);
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+
+
+    glLoadIdentity();
+    glTranslatef(0.0f, -0.5f, -20.0f);
+    glRotatef(-90.0, 1.0f, 0.0f, 0.0f);
+
+
+    glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
+
+    glRotatef(angle, 0.0f, 0.0f, 1.0f);
+    
+
+    /////////////////////Tree 1
+    glColor3f(0.0f, 0.1f, 0.0f);
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0f, 0.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    //Ствол
+    glColor3f(0.1f, 0.0f, 0.0f);
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -0.5f);
+    glutSolidCube(0.5);
+    glPopMatrix;
+
+
+    ///////////////////////Tree 2
+    glColor3f(0.0f, 0.1f, 0.0f);
+    glPushMatrix;
+    glTranslatef(0.0f, 1.5f, 2.5f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    //Ствол
+    glColor3f(0.1f, 0.0f, 0.0f);
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -0.5f);
+    glutSolidCube(0.5);
+    glPopMatrix;
+
+
+    ///////////////////////Tree 3
+    glColor3f(0.0f, 0.1f, 0.0f);
+    glPushMatrix;
+    glTranslatef(1.0f, 0.5f, 2.5f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    //Ствол
+    glColor3f(0.1f, 0.0f, 0.0f);
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -0.5f);
+    glutSolidCube(0.5);
+    glPopMatrix;
+
+
+    ///////////////////////Tree 4
+    glColor3f(0.0f, 0.1f, 0.0f);
+    glPushMatrix;
+    glTranslatef(-0.5f, -3.5f, 2.5f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    //Ствол
+    glColor3f(0.1f, 0.0f, 0.0f);
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -0.5f);
+    glutSolidCube(0.5);
+    glPopMatrix;
+
+
+    ///////////////////////Tree 5
+    glColor3f(0.0f, 0.1f, 0.0f);
+    glPushMatrix;
+    glTranslatef(-1.5f, 1.5f, 2.5f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    //Ствол
+    glColor3f(0.1f, 0.0f, 0.0f);
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -0.5f);
+    glutSolidCube(0.5);
+    glPopMatrix;
+
+
+    ///////////////////////Tree 6
+    glColor3f(0.0f, 0.1f, 0.0f);
+    glPushMatrix;
+    glTranslatef(-3.5f, 2.5f, 2.5f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    //Ствол
+    glColor3f(0.1f, 0.0f, 0.0f);
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -0.5f);
+    glutSolidCube(0.5);
+    glPopMatrix;
+
+
+    ///////////////////////Tree 7
+    glColor3f(0.0f, 0.1f, 0.0f);
+    glPushMatrix;
+    glTranslatef(+6.5f, -2.5f, 2.5f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    //Ствол
+    glColor3f(0.1f, 0.0f, 0.0f);
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -0.5f);
+    glutSolidCube(0.5);
+    glPopMatrix;
+    
+
+
+    ///////////////////////Tree 8
+    glColor3f(0.0f, 0.1f, 0.0f);
+    glPushMatrix;
+    glTranslatef(+3.5f, -1.5f, 2.5f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -1.0f);
+    glutSolidCone(2, 3, 20, 3);
+    glPopMatrix;
+
+    //Ствол
+    glColor3f(0.1f, 0.0f, 0.0f);
+    glPushMatrix;
+    glTranslatef(0.0f, 0.0, -0.5f);
+    glutSolidCube(0.5);
+    glPopMatrix;
+
+
+    //glPushMatrix
+    
+
+
+    glLoadIdentity();
+    glTranslatef(0.0f, -2.5f, -20.5f);
+    glRotatef(angle, 0.0f, 1.0f, 0.0f);
+
+
+
+    //Under box garden
+    glBegin(GL_QUADS);
+
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glVertex3f(7.5f, -1.0f, 7.5f);
+    glVertex3f(-7.5f, -1.0f, 7.5f);
+    glVertex3f(-7.5f, -1.0f, -7.5f);
+    glVertex3f(7.5f, -1.0f, -7.5f);
+
+    glEnd();
+
+    glPopMatrix();
+
+
+    glutSwapBuffers();
+
+
+    angle += 1.5f;
+}
+
+
+void timer(int value) {
+    glutPostRedisplay();
+    glutTimerFunc(refreshMills, timer, 0);
+}
+
+
+void reshape(GLsizei width, GLsizei height) {
+
+    if (height == 0) height = 1;
+    GLfloat aspect = (GLfloat)width / (GLfloat)height;
+
+
+    glViewport(0, 0, width, height);
+
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(45.0f, aspect, 0.1f, 100.0f);
+}
+
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE);
+    glutInitWindowSize(640, 480);
+    glutInitWindowPosition(50, 50);
+    glutCreateWindow(title);
+    glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
+    initGL();
+    glutTimerFunc(0, timer, 0);
+    glutMainLoop();
+    return 0;
+}
