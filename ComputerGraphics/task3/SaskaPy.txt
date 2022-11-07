@@ -1,0 +1,150 @@
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+from OpenGL.GL import *
+import sys
+
+
+def display():
+    global xRot, yRot
+    glClearColor(0.0, 0.0, 0.0, 1.0)
+    glClearDepth(1.0)
+    glEnable(GL_DEPTH_TEST)
+    glDepthFunc(GL_LEQUAL)
+    glShadeModel(GL_SMOOTH)
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST)
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glMatrixMode(GL_MODELVIEW)
+    glColor3f(0, 1, 0)
+    glPushMatrix()
+
+    glLoadIdentity()
+    glTranslatef(0.0, 0.0, -8.5)
+
+    glRotatef(xRot, 1.0, 0.0, 0.0)
+    glRotatef(yRot, 0.0, 1.0, 0.0)
+
+    glColor4f(1.0, 0.5, 0.0, 0.0)
+    glutSolidCube(2) ########################BOX
+
+
+    glBegin(GL_QUADS)
+    # Front door
+    glColor3f(0.1, 0.1, 0.1)
+    glVertex3f(1.0, -1.0, 1.05)
+    glVertex3f(0.0, -1.0, 1.05)
+    glVertex3f(0.0, 0.5, 1.05)
+    glVertex3f(1.0, 0.5, 1.05)
+
+    # Back window
+    glColor3f(0.0, 0.0, 1.0)
+    glVertex3f(0.5, -0.5, -1.05)
+    glVertex3f(-0.5, -0.5, -1.05)
+    glVertex3f(-0.5, 0.5, -1.05)
+    glVertex3f(0.5, 0.5, -1.05)
+
+    # Перегородка ввертикальная
+    glColor3f(0.1, 0.1, 0.1)
+    glVertex3f(0.02, -0.5, -1.06)
+    glVertex3f(-0.02, -0.5, -1.06)
+    glVertex3f(-0.02, 0.5, -1.06)
+    glVertex3f(0.02, 0.5, -1.06)
+
+
+    # Back window
+    glColor3f(0.1, 0.1, 0.1)
+    glVertex3f(0.5, -0.02, -1.05)
+    glVertex3f(-0.5, -0.02, -1.05)
+    glVertex3f(-0.5, 0.02, -1.05)
+    glVertex3f(0.5, 0.02, -1.05)
+
+
+    #Under box garden
+    glColor3f(0.0, 1.0, 0.0)
+    glVertex3f(2.5, -1.0, 2.5)
+    glVertex3f(-2.5, -1.0, 2.5)
+    glVertex3f(-2.5, -1.0, -2.5)
+    glVertex3f(2.5, -1.0, -2.5)
+
+    glEnd()  #end draw cude
+
+
+    ##############################Крыша поехала
+    glTranslatef(0.0, 2.0, 0.0)
+
+    glColor4f(1.0, 1.0, 0.0, 0.0)
+    glBegin(GL_TRIANGLES)
+    #Front
+    glVertex3f(0.0, 1.0, 0.0)
+    glVertex3f(-1.0, -1.0, 1.0)
+    glVertex3f(1.0, -1.0, 1.0)
+
+    #Right
+    glVertex3f(0.0, 1.0, 0.0)
+    glVertex3f(1.0, -1.0, -1.0)
+    glVertex3f(1.0, -1.0, 1.0)
+
+    #Back
+    glVertex3f(0.0, 1.0, 0.0)
+    glVertex3f(1.0, -1.0, -1.0)
+    glVertex3f(-1.0, -1.0, -1.0)
+
+    #Left
+    glVertex3f(0.0, 1.0, 0.0)
+    glVertex3f(-1.0, -1.0, 1.0)
+    glVertex3f(-1.0, -1.0, -1.0)
+
+    #Bottom
+    glColor3f(0.1, 0.0, 0.0)
+    glVertex3f(1.0, -1.0, 1.0)
+    glVertex3f(-1.0, -1.0, 1.0)
+    glVertex3f(-1.0, -1.0, -1.0)
+
+    glVertex3f(1.0, -1.0, 1.0)
+    glVertex3f(-1.0, -1.0, -1.0)
+    glVertex3f(1.0, -1.0, -1.0)
+
+    glEnd();
+
+
+    glPopMatrix()
+    glutSwapBuffers()
+    return
+
+
+def SpecialKeys(key, x, y):
+    global xRot, yRot
+    if (key == GLUT_KEY_UP):
+        xRot -= 5.0
+    if (key == GLUT_KEY_DOWN):
+        xRot += 5.0
+    if (key == GLUT_KEY_LEFT):
+        yRot -= 5.0
+    if (key == GLUT_KEY_RIGHT):
+        yRot += 5.0
+    glutPostRedisplay()
+
+
+xRot = 0.0
+yRot = 0.0
+
+
+def main():
+    glutInit(sys.argv)
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH)
+    glutInitWindowSize(800, 700)
+    glutCreateWindow(b'sphere')
+
+    glutDisplayFunc(display)
+    glutSpecialFunc(SpecialKeys)
+    glMatrixMode(GL_PROJECTION)
+    gluPerspective(40., 1., 1., 40.)
+    glMatrixMode(GL_MODELVIEW)
+    gluLookAt(0, 0, 10,
+              0, 0, 0,
+              0, 1, 0)
+    glPushMatrix()
+    glutMainLoop()
+    return
+
+
+main()
