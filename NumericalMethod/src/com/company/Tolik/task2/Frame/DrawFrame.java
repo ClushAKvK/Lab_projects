@@ -7,6 +7,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -42,7 +43,9 @@ public class DrawFrame {
                         PlotOrientation.VERTICAL,
                         true, true, true);
 
-
+        XYLineAndShapeRenderer renderer =
+                (XYLineAndShapeRenderer) chart.getXYPlot().getRenderer();
+        renderer.setSeriesShapesVisible(1, true);
 
         JFrame frame = new JFrame("MinimalStaticChart");
         frame.addWindowListener(new WindowAdapter() {
