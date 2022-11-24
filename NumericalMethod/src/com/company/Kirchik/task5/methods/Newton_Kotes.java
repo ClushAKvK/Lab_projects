@@ -14,7 +14,7 @@ public class Newton_Kotes {
             formula2N = formula(A, B, 2 * n, func);
         } while (Math.abs(formula2N - formulaN) > eps);
 
-        return formula2N;
+        return formula2N + (formula2N - formulaN) / 15;
     }
 
     public static double formula(double A, double B, double n, Function func) {
